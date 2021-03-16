@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+      jadira:
+        usertype:
+          autoRegisterUserTypes: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url:  jdbc:postgresql://localhost:5432/employee?currentSchema=public
+    username: postgres
+    password: 123456

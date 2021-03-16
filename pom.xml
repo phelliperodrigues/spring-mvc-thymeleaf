@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.phellipe.mvc</groupId>
-    <artifactId>demo-mvc-thymeleaf</artifactId>
+    <artifactId>spring-mvc-thymeleaf</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo-mvc-thymeleaf</name>
+    <name>spring-mvc-thymeleaf</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
@@ -48,6 +48,30 @@
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>open-iconic</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>jquery-mask-plugin</artifactId>
+            <version>1.14.15</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
