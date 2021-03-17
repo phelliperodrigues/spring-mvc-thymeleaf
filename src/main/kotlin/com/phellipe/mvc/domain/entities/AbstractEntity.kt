@@ -1,4 +1,4 @@
-package com.phellipe.mvc.domain
+package com.phellipe.mvc.domain.entities
 
 import java.io.Serializable
 import javax.persistence.GeneratedValue
@@ -9,5 +9,5 @@ import javax.persistence.MappedSuperclass
 @MappedSuperclass
 abstract class AbstractEntity<ID : Serializable>(
     @Id @GeneratedValue(strategy = IDENTITY)
-    val id: ID? = null
+    var id: ID? = null
 ) : Serializable

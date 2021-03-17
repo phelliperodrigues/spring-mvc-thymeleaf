@@ -10,6 +10,10 @@ spring:
       jadira:
         usertype:
           autoRegisterUserTypes: true
+    open-in-view: true
+  thymeleaf:
+    encoding: UTF-8
+    cache: false
   datasource:
     driverClassName: org.postgresql.Driver
     url:  jdbc:postgresql://localhost:5432/employee?currentSchema=public

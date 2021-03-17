@@ -1,4 +1,4 @@
-package com.phellipe.mvc.domain
+package com.phellipe.mvc.domain.entities
 
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -9,7 +9,7 @@ import javax.persistence.Table
 @Table(name = "departamentos")
 data class Departamento(
     @Column(name = "nome", nullable = false, unique = true, length = 60)
-    val name: String,
+    var nome: String? = null,
     @OneToMany(mappedBy = "departamento")
-    val cargos: List<Cargo>
+    var cargos: List<Cargo>? = null
 ) : AbstractEntity<Long>()

@@ -1,4 +1,4 @@
-package com.phellipe.mvc.domain
+package com.phellipe.mvc.domain.entities
 
 import java.math.BigDecimal
 import java.time.LocalDate
@@ -14,23 +14,23 @@ import javax.persistence.Table
 @Table(name = "funcionarios")
 data class Funcionario(
     @Column(nullable = false, unique = true)
-    val nome: String,
+    var nome: String,
 
     @Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-    val salario: BigDecimal,
+    var salario: BigDecimal,
 
     @Column(name = "data_entrada", nullable = false, columnDefinition = "DATE")
-    val dataEntrada: LocalDate,
+    var dataEntrada: LocalDate,
 
     @Column(name = "data_saida", columnDefinition = "DATE")
-    val dataSaida: LocalDate,
+    var dataSaida: LocalDate,
 
     @OneToOne(cascade = [ALL])
     @JoinColumn(name = "endereco_id_fk")
-    val endereco: Endereco,
+    var endereco: Endereco,
 
     @ManyToOne
     @JoinColumn(name = "cargo_id_fk")
-    val cargo: Cargo
+    var cargo: Cargo
 
 ) : AbstractEntity<Long>()

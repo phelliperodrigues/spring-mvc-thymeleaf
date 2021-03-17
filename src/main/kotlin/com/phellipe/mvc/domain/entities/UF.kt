@@ -1,4 +1,4 @@
-package com.phellipe.mvc.domain
+package com.phellipe.mvc.domain.entities
 
 enum class UF(
     val sigla: String,

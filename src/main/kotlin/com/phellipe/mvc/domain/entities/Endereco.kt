@@ -1,4 +1,4 @@
-package com.phellipe.mvc.domain
+package com.phellipe.mvc.domain.entities
 
 import javax.persistence.Column
 import javax.persistence.Entity
