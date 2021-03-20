@@ -1,6 +1,9 @@
 package dev.phellipe.curso.thymeleaf.web.controller;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,14 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dev.phellipe.curso.thymeleaf.domain.Cargo;
 import dev.phellipe.curso.thymeleaf.domain.Departamento;
 import dev.phellipe.curso.thymeleaf.service.CargoService;
 import dev.phellipe.curso.thymeleaf.service.DepartamentoService;
-
-import javax.validation.Valid;
+import dev.phellipe.curso.thymeleaf.util.PaginacaoUtil;
 
 @Controller
 @RequestMapping("/cargos")
@@ -34,20 +37,30 @@ public class CargoController {
 
 	@GetMapping("/cadastrar")
 	public String cadastrar(Cargo cargo) {
-		return "/cargo/cadastro";
+		return "cargo/cadastro";
 	}
 	
 	@GetMapping("/listar")
-	public String listar(ModelMap model) {
-		model.addAttribute("cargos", cargoService.buscarTodos());
-		return "/cargo/lista"; 
+	public String listar(ModelMap model, 
+						 @RequestParam("page") Optional<Integer> page, 
+						 @RequestParam("dir") Optional<String> dir) {
+		
+		int paginaAtual = page.orElse(1);
+		String ordem = dir.orElse("asc");		
+		
+		PaginacaoUtil<Cargo> pageCargo = cargoService.buscarPorPagina(paginaAtual, ordem);
+		
+		model.addAttribute("pageCargo", pageCargo);
+		return "cargo/lista"; 
 	}
 	
 	@PostMapping("/salvar")
-	public String salvar(@Valid Cargo cargo, BindingResult result , RedirectAttributes attr) {
-		if (result.hasErrors())
-			return "/cargo/cadastro";
-
+	public String salvar(@Valid Cargo cargo, BindingResult result, RedirectAttributes attr) {
+		
+		if (result.hasErrors()) {
+			return "cargo/cadastro";
+		}
+		
 		cargoService.salvar(cargo);
 		attr.addFlashAttribute("success", "Cargo inserido com sucesso.");
 		return "redirect:/cargos/cadastrar";
@@ -60,10 +73,12 @@ public class CargoController {
 	}
 	
 	@PostMapping("/editar")
-	public String editar(@Valid Cargo cargo,  BindingResult result , RedirectAttributes attr) {
-		if (result.hasErrors())
-			return "/cargo/cadastro";
-
+	public String editar(@Valid Cargo cargo, BindingResult result, RedirectAttributes attr) {
+		
+		if (result.hasErrors()) {
+			return "cargo/cadastro";
+		}	
+		
 		cargoService.editar(cargo);
 		attr.addFlashAttribute("success", "Registro atualizado com sucesso.");
 		return "redirect:/cargos/cadastrar";
